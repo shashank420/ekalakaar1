@@ -351,7 +351,7 @@
         <div class="row">
 
         <div class="col-md-12" style="padding-left: 10%; padding-right:10%;">
-            <form class="row g-3" action="" method="">
+            <form class="row g-3" action="/partials/_handleContact.php" method="post">
                 <div class="col-md-4">
                   <label for="validationDefault01" class="form-label">Contact Number</label>
                   <input type="text" class="form-control" id="validationDefault01" value="" required>
