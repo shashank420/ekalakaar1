@@ -26,7 +26,7 @@
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" class="">
     <!-- *************Nav***************** -->
-
+    
   <nav class="navbar navbar-light navbar-expand-lg fixed-top" style="background-color: black;" > 
         <div class="container ">
             <a class="navbar-brand text-white" href="#">
@@ -351,7 +351,7 @@
         <div class="row">
 
         <div class="col-md-12" style="padding-left: 10%; padding-right:10%;">
-            <form class="row g-3">
+            <form class="row g-3" action="" method="">
                 <div class="col-md-4">
                   <label for="validationDefault01" class="form-label">Contact Number</label>
                   <input type="text" class="form-control" id="validationDefault01" value="" required>
