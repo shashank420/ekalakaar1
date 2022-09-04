@@ -10,13 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = mysqli_query($conn, $sql);
         $_SESSION['showAlert'] = true;
         $numberofrows = mysqli_num_rows($result);
-        if ($numberofrows > 0) {
-            while ($rows = mysqli_fetch_assoc($result)) {
-                echo 'Name: '.$rows['firstName'] .' '. $rows['lastName'].'<br>';
-                echo 'Phone Number: '.$rows['countryCode'].' '. $rows['phoneNo'].'<br>';
-                echo 'Job Role: '.$rows['jobName'].'<br>';
-                echo 'Email ID: '.$rows['emailId'];
-            }
+        if ($numberofrows == 1) {
+            header('Location: ../registeration1.php');
         }
         else{
             $_SESSION['showNoAccount'] = true;
