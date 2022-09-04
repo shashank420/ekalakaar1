@@ -1,10 +1,11 @@
 <?php
 session_start();
 require "googlelogin/config.php";
-if (!isset($_SESSION['showAlert']) || !isset($_SESSION['showError'])) {
+if (!isset($_SESSION['showAlert']) || !isset($_SESSION['showError']) || !isset($_SESSION['passwordError']) || !isset($_SESSION['showEmailError'])) {
     $_SESSION['showAlert'] = false;
     $_SESSION['showError'] = false;
     $_SESSION['showEmailError'] = false;
+    $_SESSION['passwordError'] = false;
 }
 else if ($_SESSION['showAlert'] == true) {
     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -26,6 +27,13 @@ else if($_SESSION['showEmailError'] == true){
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>';
   unset($_SESSION['showEmailError']);
+}
+else if ($_SESSION['passwordError'] == true) {
+    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Error!</strong> Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>';
+  unset($_SESSION['passwordError']);
 }
 $loginURL = $client -> createAuthUrl();
 ?>
@@ -69,7 +77,7 @@ $loginURL = $client -> createAuthUrl();
 
             <!-- Registeration Form -->
             <div class="col-md-7 col-lg-6 ml-auto">
-                <form action="partials/_handleSignUp.php" method="post">
+                <form action="mail/mail_otp.php" method="post">
                     <div class="row">
 
                         <!-- First Name -->

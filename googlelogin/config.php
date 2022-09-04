@@ -2,7 +2,7 @@
 require "vendor/autoload.php";
 
 $clientID = "863689907736-3dd6sh3l8cdp829p3hh5dimuu7m7fenp.apps.googleusercontent.com";
-$clientSecret = "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";
+$clientSecret = "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";
 $redirectURL = "http://localhost/ekalakaar/googlelogin/callback.php";
 
 // Creating a client request to google

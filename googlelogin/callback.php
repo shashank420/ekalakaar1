@@ -1,8 +1,11 @@
 <?php
 session_start();
 require "config.php";
+require "../partials/_dbconnect.php";
 if (isset($_SESSION['access_token'])) {
     $client -> setAccessToken($_SESSION['access_token']);
+    header('Location: index.php');
+     exit();
 }
 else if (isset($_GET['code'])){
         $token = $client -> fetchAccessTokenWithAuthCode($_GET['code']); 
@@ -16,6 +19,21 @@ else if (isset($_GET['code'])){
         $_SESSION['picture'] = $userData['picture'];
         $_SESSION['familyName'] = $userData['familyName'];
         $_SESSION['givenName'] = $userData['givenName'];
+        
+        $id = $userData['id'];
+        $email = $userData['email'];
+        $gender = $userData['gender'];
+        $picture = $userData['picture'];
+        $familyName = $userData['familyName'];
+        $givenName = $userData['givenName'];
+
+        $sql = "SELECT email FROM `googlesignup` WHERE email = '$email';";
+        $result = mysqli_query($conn, $sql);
+        $num_rows = mysqli_num_rows($result);
+        if ($num_rows == 0) {
+            $sql = "INSERT INTO `googlesignup` (`userId`, `givenName`, `familyName`, `gender`, `email`, `picture`) VALUES ('$id', '$givenName', '$familyName', '$gender', '$email', '$picture');";
+            $result = mysqli_query($conn, $sql);
+        }
         header('Location: index.php');
         exit();
 }

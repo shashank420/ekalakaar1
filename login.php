@@ -5,12 +5,11 @@ if (!isset($_SESSION['showNoAccount'])) {
 }
 else if($_SESSION['showNoAccount'] == true) {
     echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <strong>Error!</strong> No account was found with the given email address. Please try again or sign up.
+    <strong>Error!</strong> No account exists with the given credentials. Please try again.
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>';
   unset($_SESSION['showAlert']);
 }
-
 ?>
 <html lang="en">
 
@@ -77,7 +76,7 @@ else if($_SESSION['showNoAccount'] == true) {
                                     <input id="chk1" type="checkbox" name="chk" class="custom-control-input">
                                     <label for="chk1" class="custom-control-label text-sm">Remember me</label>
                                 </div>
-                                <a href="#" class="ml-auto mb-0 text-sm">Forgot Password?</a>
+                                <a href="forgot_password.php" class="ml-auto mb-0 text-sm">Forgot Password?</a>
                             </div>
                             <div class="row mb-3 px-3">
                                 <button type="submit" class="btn btn-blue text-center">Login</button>

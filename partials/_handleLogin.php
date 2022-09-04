@@ -8,9 +8,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password  = $_POST['password'];
         $sql = "SELECT * FROM `signup` WHERE emailId = '$email' AND userPassword = '$password'";
         $result = mysqli_query($conn, $sql);
-        $_SESSION['showAlert'] = true;
         $numberofrows = mysqli_num_rows($result);
-        if ($numberofrows > 0) {
+        // $_SESSION['showAlert'] = true;
+        if ($numberofrows == 1) {
             while ($rows = mysqli_fetch_assoc($result)) {
                 echo 'Name: '.$rows['firstName'] .' '. $rows['lastName'].'<br>';
                 echo 'Phone Number: '.$rows['countryCode'].' '. $rows['phoneNo'].'<br>';

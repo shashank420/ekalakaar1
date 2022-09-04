@@ -4,6 +4,7 @@ if (isset($_SESSION['access_token'])) {
     header('Location: index.php');
     exit();
 }
+
 $loginURL = $client -> createAuthUrl();
 
 
