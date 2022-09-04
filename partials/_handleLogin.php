@@ -11,12 +11,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $numberofrows = mysqli_num_rows($result);
         // $_SESSION['showAlert'] = true;
         if ($numberofrows == 1) {
-            while ($rows = mysqli_fetch_assoc($result)) {
-                echo 'Name: '.$rows['firstName'] .' '. $rows['lastName'].'<br>';
-                echo 'Phone Number: '.$rows['countryCode'].' '. $rows['phoneNo'].'<br>';
-                echo 'Job Role: '.$rows['jobName'].'<br>';
-                echo 'Email ID: '.$rows['emailId'];
-            }
+            header('Location:../registration1.php');
+            // while ($rows = mysqli_fetch_assoc($result)) {
+            //     echo 'Name: '.$rows['firstName'] .' '. $rows['lastName'].'<br>';
+            //     echo 'Phone Number: '.$rows['countryCode'].' '. $rows['phoneNo'].'<br>';
+            //     echo 'Job Role: '.$rows['jobName'].'<br>';
+            //     echo 'Email ID: '.$rows['emailId'];
+            // }
         }
         else{
             $_SESSION['showNoAccount'] = true;
