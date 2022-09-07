@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $numberofrows = mysqli_num_rows($result);
         // $_SESSION['showAlert'] = true;
         if ($numberofrows == 1) {
-            header('Location:../registration1.php');
+            header('Location:../registeration1.php');
             // while ($rows = mysqli_fetch_assoc($result)) {
             //     echo 'Name: '.$rows['firstName'] .' '. $rows['lastName'].'<br>';
             //     echo 'Phone Number: '.$rows['countryCode'].' '. $rows['phoneNo'].'<br>';

@@ -1,15 +1,49 @@
 <?php
+require "googlelogin/config.php";
 session_start();
-if (!isset($_SESSION['showNoAccount'])) {
+if (!isset($_SESSION['showNoAccount']) || !isset($_SESSION['passwordError']) || !isset($_SESSION['passwordChanged']) || !isset($_SESSION['emailexistsGoogle']) || !isset($_SESSION['emailexistsSignup'])) {
     $_SESSION['showNoAccount'] = false;
+    $_SESSION['passwordError'] = false;
+    $_SESSION['passwordChanged'] = false;
+    $_SESSION['emailexistsGoogle'] = false;
+    $_SESSION['emailexistsSignup'] = false;
 }
 else if($_SESSION['showNoAccount'] == true) {
     echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
     <strong>Error!</strong> No account exists with the given credentials. Please try again.
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>';
-  unset($_SESSION['showAlert']);
+  unset($_SESSION['showNoAccount']);
 }
+else if ($_SESSION['passwordError'] == true) {
+    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Error!</strong> Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>';
+  unset($_SESSION['passwordError']);
+}
+else if($_SESSION['passwordChanged'] == true){
+    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Success!</strong> Password has been changed successfully.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>';
+  unset($_SESSION['passwordChanged']);
+}
+else if($_SESSION['emailexistsGoogle'] == true) {
+    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Error!</strong> Account already exists with this email address. Please login with Google.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>';
+  unset($_SESSION['emailexistsGoogle']);
+}
+else if($_SESSION['emailexistsSignup'] == true){
+    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Error!</strong> Account already exists with this email address. Please login with your credentials.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>';
+  unset($_SESSION['emailexistsSignup']);
+}
+$loginURL = $client -> createAuthUrl();   
 ?>
 <html lang="en">
 
@@ -21,7 +55,7 @@ else if($_SESSION['showNoAccount'] == true) {
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="login.css" rel="stylesheet" type="text/css">
-
+    <title>Login</title>
     
 </head>
 
@@ -50,7 +84,9 @@ else if($_SESSION['showNoAccount'] == true) {
                                 <div class="fa fa-twitter"></div>
                             </div>
                             <div class="google text-center mr-3">
+                                <a href="<?php echo $loginURL; ?>">
                                 <div class="fa fa-google"></div>
+                            </a>
                             </div>
                         </div>
                         <div class="row px-3 mb-4">

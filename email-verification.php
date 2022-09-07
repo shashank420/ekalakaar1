@@ -8,16 +8,23 @@ else if ($_SESSION['emailverify'] == true) {
     $_SESSION['showAlert'] = false;
     $_SESSION['showError'] = false;
     require "partials/_dbconnect.php";
-        if (isset($_SESSION['firstname']) && isset($_SESSION['lastname']) && isset($_SESSION['email']) && isset($_SESSION['countryCode']) && isset($_SESSION['phone']) && isset($_SESSION['jobtitle']) && isset($_SESSION['password']) && isset($_SESSION['passwordConfirmation'])) {
+        if (isset($_SESSION['firstname']) && isset($_SESSION['lastname']) && isset($_SESSION['email'])  && isset($_SESSION['jobtitle']) && isset($_SESSION['password']) && isset($_SESSION['passwordConfirmation'])) {
             $firstname = $_SESSION['firstname'];      
             $lastname = $_SESSION['lastname'];      
-            $email = $_SESSION['email'];      
-            $countryCode = $_SESSION['countryCode'];
-            $phone = $_SESSION['phone'];
+            $email = $_SESSION['email'];
             $jobtitle = $_SESSION['jobtitle'];
             $password  = $_SESSION['password'];
             $passwordConfirmation = $_SESSION['passwordConfirmation'];
             if ($password == $passwordConfirmation) {
+                // $sql = "SELECT email FROM `googlesignup` WHERE email ='$email'";
+                // $result = mysqli_query($conn, $sql);
+                // $rows = mysqli_num_rows($result);
+                // if ($rows > 0) {
+                //     $_SESSION['email'] = true;
+                //     header("Location: login.php");
+                //     exit();
+                // }
+                // else{
                 $sql = "SELECT emailId FROM `signup` WHERE emailId = '$email'";
                 $result = mysqli_query($conn, $sql);
                 $rows = mysqli_num_rows($result);
@@ -25,10 +32,11 @@ else if ($_SESSION['emailverify'] == true) {
                             $_SESSION['showEmailError'] = true;
                     }
                     else{
-                        $sql1 = "INSERT INTO `signup` (`firstName`, `lastName`, `emailId`, `countryCode`, `phoneNo`, `jobName`, `userPassword`) VALUES ('$firstname', '$lastname', '$email', '$countryCode', '$phone', '$jobtitle', '$password');";
+                        $sql1 = "INSERT INTO `signup` (`firstName`, `lastName`, `emailId`, `jobName`, `userPassword`) VALUES ('$firstname', '$lastname', '$email', '$jobtitle', '$password');";
                         $result1 = mysqli_query($conn, $sql1);
                         $_SESSION['showAlert'] = true;
                     }
+                // }
             }
             else {
                 $_SESSION['showError'] = true;

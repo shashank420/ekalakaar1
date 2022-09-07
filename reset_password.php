@@ -6,17 +6,29 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 require 'mail/vendor/autoload.php';
+require "partials/_bootstrap.php";
 require "partials/_dbconnect.php";
 
 session_start();
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['email'])) {
-        $_SESSION['email'] = $_POST['email'];
+
+
+
+if (isset($_POST['forgotpasswdemail'])) {
+    $_SESSION['forgotpasswdemail'] = $_POST['forgotpasswdemail'];
+    $forgotpasswdemail = $_POST['forgotpasswdemail'];
+    $sql="SELECT * FROM `signup` WHERE emailId = '$forgotpasswdemail'";
+    $result= mysqli_query($conn, $sql);
+    $num_rows = mysqli_num_rows($result);
+    if ($num_rows == 0) {
+        $_SESSION['emailNotExists'] = true;
+        header("Location: forgot_password.php"); 
+    }
+    else{
         //Create an instance; passing `true` enables exceptions
         $mail = new PHPMailer(true);
 
         try {
-            $verify_email = $_POST['email'];
+            $verify_email = $_POST['forgotpasswdemail'];
             //Server settings
             // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
             // $mail->SMTPDebug = 2;                                       //Enable verbose debug output
@@ -59,37 +71,51 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
     }
-    if (isset($_POST['otp'])) {
-        if ($_SESSION['OTP'] == $_POST['otp']) {
-            echo '<form method="post" action="">
-            <input type="text" value="'. $_SESSION['email'] .'" disabled>
-            <input type="password" maxlength="8" class="form-control" placeholder="Password" name="password" required>
-            <input type="password" maxlength="8" class="form-control" placeholder="Confirm Password" name="confirmpassword" required>
-            <button type="submit">Submit</button>
-            </form>';
+}
+if (isset($_POST['password']) && isset($_POST['confirmpassword']) && isset($_SESSION['forgotpasswdemail']) ) {
+    $email = $_SESSION['forgotpasswdemail'];
+    $password = $_POST['password'];
+    $confirmpassword = $_POST['confirmpassword'];
+    if ($password == $confirmpassword) {
+        // Validate password strength
+    $uppercase = preg_match('@[A-Z]@', $password);
+    $lowercase = preg_match('@[a-z]@', $password);
+    $number    = preg_match('@[0-9]@', $password);
+    $specialChars = preg_match('@[^\w]@', $password);
+        if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8) {
+            $_SESSION['passwordError'] = true;
+        }
+        else{
+            $sql = "UPDATE `signup` SET `userPassword` = '$confirmpassword' WHERE `signup`.`emailId` = '$email'";
+            $result = mysqli_query($conn, $sql);
+            $_SESSION['passwordChanged'] = true;
         }
     }
-    else{
-        echo '<form action="" method="post">
-        <input type="text" value="'. $_SESSION['email'] .'" disabled>
-        <input type="text" maxlength="6" pattern="\d*" class="form-control" placeholder="Enter OTP" name="otp" required>
-        <button type="submit">Submit</button>
-        </form>';
+    header("Location: login.php");
+}
+if (isset($_POST['otp'])) {
+    if ($_SESSION['OTP'] == $_POST['otp']) {
+        echo '
+        <div class="container my-5">
+        <form action="" method="post">
+        <input type="text" class="form-control" value="'. $_SESSION['forgotpasswdemail'] .'" disabled>
+        <input type="password" class="form-control" class="form-control" placeholder="Password" name="password" required>
+        <input type="password" class="form-control" placeholder="Confirm Password" name="confirmpassword" required>
+        <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+        </div>';
+
     }
 }
-
-
+else{
+    echo '
+    <div class="container">
+    <form action="" method="post">
+    <input type="text" class="form-control" value="'. $_SESSION['forgotpasswdemail'] .'" disabled>
+    <input type="text" class="form-control" maxlength="6" pattern="\d*" class="form-control" placeholder="Enter OTP" name="otp" required>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    </div>';
+}
 ?>
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html> -->
+<title>Reset Password</title>

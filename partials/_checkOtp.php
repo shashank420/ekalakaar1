@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $_SESSION['emailverify'] = false;
              }
              header('Location: ../email-verification.php');
+             exit();
         }
         else{
             $_SESSION['OTP'] = false;

@@ -47,7 +47,7 @@ $loginURL = $client -> createAuthUrl();
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="sign-up.css" type="text/css">
-
+    <title>Sign Up</title>
 </head>
 
 <body>
@@ -114,7 +114,7 @@ $loginURL = $client -> createAuthUrl();
                         </div>
 
                         <!-- Phone Number -->
-                        <div class="input-group col-lg-12 mb-4">
+                        <!-- <div class="input-group col-lg-12 mb-4">
                             <div class="input-group-prepend">
                                 <span class="input-group-text bg-white px-4 border-md border-right-0">
                                 <i class="fa fa-phone-square text-muted"></i>
@@ -127,7 +127,7 @@ $loginURL = $client -> createAuthUrl();
                             </select>
                             <input id="phoneNumber" type="tel" name="phone" placeholder="Phone Number" maxlength="10" 
                                 class="form-control bg-white border-md border-left-0 pl-3" required>
-                        </div>.
+                        </div> -->
 
 
                         <!-- Job -->
