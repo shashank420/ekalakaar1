@@ -4,6 +4,7 @@ $_SESSION['showNoAccount'] = false;
 require "_dbconnect.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['email']) && isset($_POST['password'])) {      
+        $SESSION['email'] = $_POST['email'];
         $email = $_POST['email'];
         $password  = $_POST['password'];
         $sql = "SELECT * FROM `signup` WHERE emailId = '$email' AND userPassword = '$password'";
@@ -11,6 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $numberofrows = mysqli_num_rows($result);
         // $_SESSION['showAlert'] = true;
         if ($numberofrows == 1) {
+            $_SESSION['login'] = true;
             header('Location:../registeration1.php');
             // while ($rows = mysqli_fetch_assoc($result)) {
             //     echo 'Name: '.$rows['firstName'] .' '. $rows['lastName'].'<br>';

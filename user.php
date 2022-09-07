@@ -70,7 +70,6 @@
 
       <div class="card ">
         <div class="card-header text-center text-danger " style="font-weight:bold">
-
           YOUR INFORMATION
         </div>
         <div class="card-body">

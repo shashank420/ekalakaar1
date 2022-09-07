@@ -29,11 +29,10 @@
     <div class="" style="background-color: black;">
         <nav class="navbar bg-light fixed-top" style="background-color: white;">
             <div class="container-fluid">
-                <a class="navbar-brand " style="margin-left: 70px;" href="index.html">
+                <a class="navbar-brand" style="margin-left: 70px;" href="index.php">
                     <Span class="text-danger text"> <strong>ekala</strong></Span>kaar
                 </a>
-
-
+                <a class="navbar-brand" href="partials/_logout.php">Logout</a>
             </div>
         </nav>
 

@@ -38,7 +38,7 @@ require "../partials/_dbconnect.php";
                 $result = mysqli_query($conn, $sql);
                 $rows = mysqli_num_rows($result);
                 if ($rows > 0) {
-                    $_SESSION['emailexists'] = true;
+                    $_SESSION['emailexistsGoogle'] = true;
                     header("Location: ../login.php");
                     exit();
                 }
