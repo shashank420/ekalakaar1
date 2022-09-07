@@ -1,0 +1,22 @@
+Q)Authenticity is proving who you are, and integrity is protecting the data from unauthorized changes.
+
+Integrity is about making sure that some piece of data has not been altered from some "reference version". 
+Authenticity is a special case of integrity, where the "reference version" is defined as "
+whatever it was when it was under control of a specific entity".
+
+
+Q)Security Onion is a free and open source Linux distribution for intrusion detection, 
+security monitoring, and log management. It includes CyberChef, NetworkMiner, and many other security tools.
+ ----> (also known as)SIEM(Security Investigation and Event Management)
+
+Q)An IDS provides no actual protection to the endpoint or network. A firewall, on the other hand, is designed to act as a protective system. 
+It performs analysis of the metadata of network packets and allows or blocks traffic based upon predefined rules.
+firewall blocks and filters network traffic, but an IDS/IPS detects and alerts an administrator or prevents the attack
+depending on the setup.
+
+
+
+Q)To access the windows passwords, you'll need both the SAM and SYSTEM file from C:/WINDOWS/SYSTEM32/config
+
+
+

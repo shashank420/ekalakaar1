@@ -1,3 +1,70 @@
+<?php
+require "partials/_bootstrap.php";
+require "partials/_dbconnect.php";
+
+session_start();
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+  // if (isset($_POST['curr_position'])) {
+  $curr_position = $_POST['curr_position'];
+  $Role_of_application = $_POST['Role_of_application'];
+  $firstName = $_POST['firstname'];
+  $_SESSION['firstname'] = $firstName;
+  $lastName = $_POST['lastname'];
+  $_SESSION['lastname'] = $lastName;
+  $phone = $_POST['phone'];
+  $_SESSION['phone'] = $phone;
+  $email = $_POST['email'];
+  $_SESSION['email'] = $email;
+  $age = $_POST['age'];
+  $_SESSION['age'] = $age;
+  $gender = $_POST['gender'];
+  $_SESSION['gender'] = $gender;
+  $caste = $_POST['caste'];
+  $_SESSION['caste'] = $caste;
+  $religion = $_POST['religion'];
+  $_SESSION['religion'] = $religion;
+  $height = $_POST['height'];
+  $_SESSION['height'] = $height;
+  $weight = $_POST['weight'];
+  $_SESSION['weight'] = $weight;
+  $language = $_POST['language'];
+  $_SESSION['language'] = $language;
+  $education = $_POST['education'];
+  $_SESSION['education'] = $education;
+  $skills = $_POST['skills'];
+  $_SESSION['skills'] = $skills;
+  $award = $_POST['award'];
+  $_SESSION['award'] = $award;
+  $experience = $_POST['experience'];
+  $_SESSION['experience'] = $experience;
+  $url = $_POST['url'];
+  $_SESSION['url'] = $url;
+  $reference = $_POST['reference'];
+  $_SESSION['reference'] = $reference;
+  $support = $_POST['support'];
+  $_SESSION['support'] = $support;
+  $suggestions = $_POST['suggestions'];
+  $_SESSION['suggestions'] = $suggestions;
+  $pdf = $_FILES['pdf']['name'];
+  $_SESSION['pdf["name"]'] = $pdf;
+  $pdf_type = $_FILES['pdf']['type'];
+  $pdf_size = $_FILES['pdf']['size'];
+  $pdf_tem_loc = $_FILES['pdf']['tmp_name'];
+  $pdf_store = "../pdf/" . $pdf;
+  move_uploaded_file($pdf_tem_loc, $pdf_store);
+  $sql= "UPDATE `registration` SET `Age` = '$age', 'FirstName'='$firstName','LastName'='$lastName','PhoneNumber'='$phone','Email'='$email','Gender'='$gender','Caste'='$caste','Religion'='$religion','Height'='$height','Weight1'='$weight','Lang'='$language','Skills'='$skills','Experience'='$experience','Awards'='$award','weblinks'='$url,'Reference'='$reference','pdf'='$pdf','Support'='$support','Suggestions'='$suggestions'; WHERE `
+
+  WHERE `registration`.`S.no` = 1;";
+  $result = mysqli_query($conn, $sql);
+}
+
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,68 +145,96 @@
           <form action="" method="post" class="row g-3 needs-validation" novalidate>
             <div class="col-md-4">
               <label for="validationCustom01" class="form-label">First name</label>
-              <input type="text" class="form-control" name="firstname" id="form-control" value="first_name" disabled>
+              <input type="text" class="form-control" name="firstname" id="form-control" value="<?php
+                                                                                                echo $_SESSION['firstname'];
+                                                                                                ?>" disabled>
             </div>
             <div class="col-md-4">
               <label for="validationCustom02" class="form-label">Last name</label>
-              <input type="text" class="form-control" name="lastname" value="last_name" disabled>
+              <input type="text" class="form-control" name="lastname" value="<?php
+                                                                              echo $_SESSION['lastname'];
+                                                                              ?>">
             </div>
             <div class="col-md-6">
               <label for="validationCustom02" class="form-label">Phone number</label>
-              <input type="number" class="form-control" name="phone" value=9787894787 disabled>
+              <input type="number" class="form-control" name="phone" value="<?php
+                                                                            echo $_SESSION['phone'];
+                                                                            ?>">
             </div>
             <div class="col-md-6">
               <label for="validationCustomUsername" class="form-label">Email</label>
               <div class="input-group has-validation">
                 <span class="input-group-text" id="inputGroupPrepend">@</span>
-                <input type="text" class="form-control" name="email" aria-describedby="inputGroupPrepend" value="xyz1245@gmail.com" disabled>
+                <input type="text" class="form-control" name="email" aria-describedby="inputGroupPrepend" value="<?php
+                                                                                                                  echo $_SESSION['email'];
+                                                                                                                  ?>" disabled>
               </div>
             </div>
             <div class="col-md-4">
               <label for="validationCustom02" class="form-label">Age</label>
-              <input type="number" class="form-control" name="age" value=24 disabled>
+              <input type="number" class="form-control" name="age" value="<?php
+                                                                          echo $_SESSION['age'];
+                                                                          ?>">
             </div>
             <div class="col-md-3">
               <label for="validationCustom04" class="form-label">Gender</label>
-              <input type="text" class="form-control" name="gender" value="Male" disabled>
+              <input type="text" class="form-control" name="gender" value="<?php
+                                                                            echo $_SESSION['gender'];
+                                                                            ?>">
               <div class="invalid-feedback">
                 Please select a Gender.
               </div>
             </div>
             <div class="col-md-3">
               <label for="validationCustom04" class="form-label">Caste</label>
-              <input type="text" class="form-control" name="Caste" value="Obc">
+              <input type="text" class="form-control" name="caste" value="<?php
+                                                                          echo $_SESSION['caste'];
+                                                                          ?>">
             </div>
             <div class="col-md-6">
               <label for="validationCustom03" class="form-label">Religion</label>
-              <input type="text" class="form-control" name="Religion" value="Hindu" disabled>
+              <input type="text" class="form-control" name="religion" value=" <?php
+                                                                              echo $_SESSION['religion'];
+                                                                              ?>">
             </div>
 
             <div class="col-md-3">
               <label for="validationCustom05" class="form-label">Height</label>
-              <input type="number" class="form-control" name="Height" value="4.5" disabled>
+              <input type="number" class="form-control" name="height" value="  <?php
+                                                                                echo $_SESSION['height'];
+                                                                                ?>">
             </div>
             <div class="col-md-3">
               <label for="validationCustom05" class="form-label">Weight</label>
-              <input type="number" class="form-control" name="weight" value="45" disabled>
+              <input type="number" class="form-control" name="weight" value="<?php
+                                                                              echo $_SESSION['weight'];
+                                                                              ?>">
             </div>
 
 
             <div class="col-md-3">
               <label for="validationCustom05" class="form-label">Language</label>
-              <input type="text" class="form-control" name="language" value="hindi" disabled>
+              <input type="text" class="form-control" name="language" value="<?php
+                                                                              echo $_SESSION['language'];
+                                                                              ?>">
             </div>
             <div class="col-md-6">
               <label for="validationCustom03" class="form-label">Education</label>
-              <input type="text" class="form-control" name="education" value="BA Art" disabled>
+              <input type="text" class="form-control" name="education" value="<?php
+                                                                              echo $_SESSION['education'];
+                                                                              ?>">
             </div>
             <div class="col-md-3">
               <label for="validationCustom05" class="form-label">Skills</label>
-              <input type="text" class="form-control" name="skils" value="Dance" disabled>
+              <input type="text" class="form-control" name="skills" value="<?php
+                                                                            echo $_SESSION['skills'];
+                                                                            ?>">
             </div>
             <div class="col-md-6">
               <label for="validationCustom05" class="form-label">Experience</label>
-              <input type="number" class="form-control" name="experience" value="3" disabled>
+              <input type="number" class="form-control" name="experience" value="<?php
+                                                                                  echo $_SESSION['experience'];
+                                                                                  ?>">
             </div>
 
             <div class="row mt-4">
@@ -147,15 +242,19 @@
                 <label for="validationCustom05" class="form-label">Url for any video link (Social Media link such as
                   YouTube/ Insta/ Facebook
                   etc.) </label>
-                <input type="text" class="form-control" name="url" id="validationCustom05" value="http://hkjhk.com" disabled>
+                <input type="text" class="form-control" name="url" id="validationCustom05" value="<?php
+                                                                                                  echo $_SESSION['url'];
+                                                                                                  ?>">
               </div>
               <div class="mb-3">
                 <label for="formFile" class="form-label">Upload your resume </label>
-                <input class="form-control" type="file" name="resume" value="img/r2.jpg" id="formFile" disabled>
+                <input class="form-control" type="file" name="pdf" value="<?php
+                                                                              echo $_SESSION['pdf["name"]'];
+                                                                              ?>" id="formFile">
               </div>
             </div>
           </form>
-          <a href="#" class="btn btn-danger" id="submit">Edit your profile</a>
+          <a href="#" class="btn btn-danger" id="submit"> Save Changes</a>
         </div>
         <div class="card-footer text-muted">
           last changes 2 days ago
@@ -202,18 +301,7 @@
 
     </div>
   </footer>
-  <script>
-    $(document).ready(function() {
-      $('#submit').click(function() {
-        var disabled = $("#form-control").attr('disabled');
-        if (disabled === undefined) {
-          $("#form-control").attr('disabled', 'disabled');
-        } else {
-          $("#form-control").removeAttr('disabled');
-        }
-      })
-    });
-  </script>
+
   <script src="js/main.js"></script>
   <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
