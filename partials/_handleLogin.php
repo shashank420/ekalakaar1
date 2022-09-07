@@ -4,7 +4,7 @@ $_SESSION['showNoAccount'] = false;
 require "_dbconnect.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['email']) && isset($_POST['password'])) {      
-        $SESSION['email'] = $_POST['email'];
+        $_SESSION['email'] = $_POST['email'];
         $email = $_POST['email'];
         $password  = $_POST['password'];
         $sql = "SELECT * FROM `signup` WHERE emailId = '$email' AND userPassword = '$password'";
