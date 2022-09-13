@@ -1,6 +1,22 @@
 <?php
 session_start();
 if (!isset($_SESSION['emailverify'])) {
+    echo '<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Email Verification</title>
+    </head>
+    <body>
+        <form action="partials/_checkOtp.php" method="post">
+        <input type="text" maxlength="6" pattern="\d*" class="form-control" placeholder="Enter OTP" name="otp" required>
+        <input type="submit" class="btn btn-primary" value="Submit">
+        </form>
+    </body>
+    
+    </html>';
     $_SESSION['emailverify'] = false;
 }
 else if ($_SESSION['emailverify'] == true) {
@@ -25,45 +41,26 @@ else if ($_SESSION['emailverify'] == true) {
                 //     exit();
                 // }
                 // else{
-                $sql = "SELECT emailId FROM `signup` WHERE emailId = '$email'";
-                $result = mysqli_query($conn, $sql);
-                $rows = mysqli_num_rows($result);
-                    if ($rows > 0) {
-                            $_SESSION['showEmailError'] = true;
-                    }
-                    else{
+                
+                    // else{
                         $sql1 = "INSERT INTO `signup` (`firstName`, `lastName`, `emailId`, `jobName`, `userPassword`) VALUES ('$firstname', '$lastname', '$email', '$jobtitle', '$password');";
                         $result1 = mysqli_query($conn, $sql1);
                         $_SESSION['showAlert'] = true;
-                    }
+                    // }
                 // }
             }
             else {
                 $_SESSION['showError'] = true;
             }
         }
-        unset($_SESSION['emailverify']);
+        // unset($_SESSION['emailverify']);
+        
 }
 else if ($_SESSION['emailverify'] == false) {
     echo "Error. Wrong OTP entered, please try again.";
     unset($_SESSION['emailverify']);
 }
 
+
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Verification</title>
-</head>
-<body>
-    <form action="partials/_checkOtp.php" method="post">
-    <input type="text" maxlength="6" pattern="\d*" class="form-control" placeholder="Enter OTP" name="otp" required>
-    <input type="submit" class="btn btn-primary" value="Submit">
-    </form>
-</body>
-
-</html>

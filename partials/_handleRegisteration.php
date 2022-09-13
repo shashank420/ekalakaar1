@@ -13,8 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $_SESSION['lastname'] = $lastName;
     $phone = $_POST['phone'];
     $_SESSION['phone'] = $phone;
-    $email = $_POST['email'];
-    $_SESSION['email'] = $email;
+    // $email = $_POST['email'];
+    // $_SESSION['email'] = $email;
     $age = $_POST['age'];
     $_SESSION['age'] = $age;
     $gender = $_POST['gender'];

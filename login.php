@@ -1,7 +1,8 @@
 <?php
 require "googlelogin/config.php";
 session_start();
-if (!isset($_SESSION['showNoAccount']) || !isset($_SESSION['passwordError']) || !isset($_SESSION['passwordChanged']) || !isset($_SESSION['emailexistsGoogle']) || !isset($_SESSION['emailexistsSignup'])) {
+if (!isset($_SESSION['showNoAccount']) || !isset($_SESSION['passwordError']) || !isset($_SESSION['passwordChanged']) || !isset($_SESSION['emailexistsGoogle']) || !isset($_SESSION['emailexistsSignup']) || !isset($_SESSION['showEmailError'])) {
+    $_SESSION['showEmailError'] = false;
     $_SESSION['showNoAccount'] = false;
     $_SESSION['passwordError'] = false;
     $_SESSION['passwordChanged'] = false;
@@ -33,8 +34,15 @@ else if($_SESSION['emailexistsGoogle'] == true) {
     echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
     <strong>Error!</strong> Account already exists with this email address. Please login with Google.
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>';
+  </div>';  
   unset($_SESSION['emailexistsGoogle']);
+}
+else if($_SESSION['showEmailError'] == true){
+    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Error!</strong> Email ID  is already in use. Please try logging in or use a different email address.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>';
+  unset($_SESSION['showEmailError']);
 }
 else if($_SESSION['emailexistsSignup'] == true){
     echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
