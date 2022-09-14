@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   $_SESSION['lastname'] = $lastName;
   $phone = $_POST['phone'];
   $_SESSION['phone'] = $phone;
-  $email = $_POST['email'];
+  $email = $_SESSION['email'];
   $_SESSION['email'] = $email;
   $age = $_POST['age'];
   $_SESSION['age'] = $age;
@@ -52,9 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   $pdf_tem_loc = $_FILES['pdf']['tmp_name'];
   $pdf_store = "../pdf/" . $pdf;
   move_uploaded_file($pdf_tem_loc, $pdf_store);
-  $sql= "UPDATE `registration` SET `Age` = '$age', 'FirstName'='$firstName','LastName'='$lastName','PhoneNumber'='$phone','Email'='$email','Gender'='$gender','Caste'='$caste','Religion'='$religion','Height'='$height','Weight1'='$weight','Lang'='$language','Skills'='$skills','Experience'='$experience','Awards'='$award','weblinks'='$url,'Reference'='$reference','pdf'='$pdf','Support'='$support','Suggestions'='$suggestions'; WHERE `
-
-  WHERE `registration`.`S.no` = 1;";
+  $sql = "UPDATE `registration` SET `Age` = '$age', 'FirstName'='$firstName','LastName'='$lastName','PhoneNumber'='$phone','Email'='$email','Gender'='$gender','Caste'='$caste','Religion'='$religion','Height'='$height','Weight1'='$weight','Lang'='$language','Skills'='$skills','Experience'='$experience','Awards'='$award','weblinks'='$url,'Reference'='$reference','pdf'='$pdf','Support'='$support','Suggestions'='$suggestions' WHERE `Email` = $email;";
   $result = mysqli_query($conn, $sql);
 }
 
@@ -141,114 +139,114 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
         <div class="card-body">
           <h5 class="card-title"></h5>
-          <form action="" method="post" class="row g-3 needs-validation" novalidate>
+          <form action="user.php" method="post" class="row g-3 needs-validation" novalidate>
             <div class="col-md-4">
-              <label for="validationCustom01" class="form-label">First name</label>
-              <input type="text" class="form-control" name="firstname" id="form-control" value="
-              <?php
-              echo $_SESSION['firstname'];
-              ?>" disabled>
+              <label for="validationCustom01" class="form-label">First name: <?php
+                                                                              echo $_SESSION['firstname'];
+                                                                              ?>" disabled></label>
+              <input type="text" class="form-control" name="firstname" id="form-control" value="">
+
             </div>
-            <div class="col-md-4">
-              <label for="validationCustom02" class="form-label">Last name</label>
-              <input type="text" class="form-control" name="lastname" value="<?php
-                                                                              echo $_SESSION['lastname'];
-                                                                              ?>">
+            <div class=" col-md-4">
+              <label for="validationCustom02" class="form-label">Last name:<?php
+                                                                            echo $_SESSION['lastname'];
+                                                                            ?></label>
+              <input type="text" class="form-control" name="lastname" value="">
+            </div>
+            <div class=" col-md-6">
+              <label for="validationCustom02" class="form-label">Phone number: <?php
+                                                                                echo $_SESSION['phone'];
+                                                                                ?></label>
+              <input type="number" class="form-control" name="phone" value="">
             </div>
             <div class="col-md-6">
-              <label for="validationCustom02" class="form-label">Phone number</label>
-              <input type="number" class="form-control" name="phone" value="<?php
-                                                                            echo $_SESSION['phone'];
-                                                                            ?>">
-            </div>
-            <div class="col-md-6">
-              <label for="validationCustomUsername" class="form-label">Email</label>
+              <label for="validationCustomUsername" class="form-label">Email:<?php echo $_SESSION['email']; ?></label>
               <div class="input-group has-validation">
                 <span class="input-group-text" id="inputGroupPrepend">@</span>
-                <input type="text" class="form-control" name="email" aria-describedby="inputGroupPrepend" value="<?php echo $_SESSION['email']; ?>" disabled>
+                <input type="text" class="form-control" name="email" aria-describedby="inputGroupPrepend" value="" disabled>
               </div>
             </div>
             <div class="col-md-4">
-              <label for="validationCustom02" class="form-label">Age</label>
-              <input type="number" class="form-control" name="age" value="<?php
-                                                                          echo $_SESSION['age'];
-                                                                          ?>">
+              <label for="validationCustom02" class="form-label">Age:<?php
+                                                                      echo $_SESSION['age'];
+                                                                      ?></label>
+              <input type="number" class="form-control" name="age" value="">
             </div>
-            <div class="col-md-3">
-              <label for="validationCustom04" class="form-label">Gender</label>
-              <input type="text" class="form-control" name="gender" value="<?php
-                                                                            echo $_SESSION['gender'];
-                                                                            ?>">
+            <div class=" col-md-3">
+              <label for="validationCustom04" class="form-label">Gender:<?php
+                                                                        echo $_SESSION['gender'];
+                                                                        ?></label>
+              <input type="text" class="form-control" name="gender" value="">
               <div class="invalid-feedback">
                 Please select a Gender.
               </div>
             </div>
             <div class="col-md-3">
-              <label for="validationCustom04" class="form-label">Caste</label>
-              <input type="text" class="form-control" name="caste" value="<?php
-                                                                          echo $_SESSION['caste'];
-                                                                          ?>">
+              <label for="validationCustom04" class="form-label">Caste:<?php
+                                                                        echo $_SESSION['caste'];
+                                                                        ?></label>
+              <input type="text" class="form-control" name="caste" value="">
             </div>
             <div class="col-md-6">
-              <label for="validationCustom03" class="form-label">Religion</label>
-              <input type="text" class="form-control" name="religion" value=" <?php
-                                                                              echo $_SESSION['religion'];
-                                                                              ?>">
+              <label for="validationCustom03" class="form-label">Religion:<?php
+                                                                          echo $_SESSION['religion'];
+                                                                          ?></label>
+              <input type="text" class="form-control" name="religion" value=" ">
             </div>
 
             <div class="col-md-3">
-              <label for="validationCustom05" class="form-label">Height</label>
-              <input type="number" class="form-control" name="height" value="  <?php
-                                                                                echo $_SESSION['height'];
-                                                                                ?>">
+              <label for="validationCustom05" class="form-label">Height:<?php
+                                                                        echo $_SESSION['height'];
+                                                                        ?></label>
+              <input type="number" class="form-control" name="height" value=" ">
             </div>
             <div class="col-md-3">
-              <label for="validationCustom05" class="form-label">Weight</label>
-              <input type="number" class="form-control" name="weight" value="<?php
-                                                                              echo $_SESSION['weight'];
-                                                                              ?>">
+              <label for="validationCustom05" class="form-label">Weight:<?php
+                                                                        echo $_SESSION['weight'];
+                                                                        ?></label>
+              <input type="number" class="form-control" name="weight" value="">
             </div>
 
 
             <div class="col-md-3">
-              <label for="validationCustom05" class="form-label">Language</label>
-              <input type="text" class="form-control" name="language" value="<?php
-                                                                              echo $_SESSION['language'];
-                                                                              ?>">
+              <label for="validationCustom05" class="form-label">Language:<?php
+                                                                          echo $_SESSION['language'];
+                                                                          ?></label>
+              <input type="text" class="form-control" name="language" value="">
             </div>
             <div class="col-md-6">
-              <label for="validationCustom03" class="form-label">Education</label>
-              <input type="text" class="form-control" name="education" value="<?php
-                                                                              echo $_SESSION['education'];
-                                                                              ?>">
+              <label for="validationCustom03" class="form-label">Education:<?php
+                                                                            echo $_SESSION['education'];
+                                                                            ?></label>
+              <input type="text" class="form-control" name="education" value="">
             </div>
             <div class="col-md-3">
-              <label for="validationCustom05" class="form-label">Skills</label>
-              <input type="text" class="form-control" name="skills" value="<?php
-                                                                            echo $_SESSION['skills'];
-                                                                            ?>">
+              <label for="validationCustom05" class="form-label">Skills:<?php
+                                                                        echo $_SESSION['skills'];
+                                                                        ?></label>
+              <input type="text" class="form-control" name="skills" value="">
             </div>
             <div class="col-md-6">
-              <label for="validationCustom05" class="form-label">Experience</label>
-              <input type="number" class="form-control" name="experience" value="<?php
-                                                                                  echo $_SESSION['experience'];
-                                                                                  ?>">
+              <label for="validationCustom05" class="form-label">Experience:<?php
+                                                                            echo $_SESSION['experience'];
+                                                                            ?></label>
+              <input type="number" class="form-control" name="experience" value="">
             </div>
 
             <div class="row mt-4">
               <div class="col-md-6">
                 <label for="validationCustom05" class="form-label">Url for any video link (Social Media link such as
                   YouTube/ Insta/ Facebook
-                  etc.) </label>
-                <input type="text" class="form-control" name="url" id="validationCustom05" value="<?php
-                                                                                                  echo $_SESSION['url'];
-                                                                                                  ?>">
+                  etc.): <?php
+                          echo $_SESSION['url'];
+                          ?> </label>
+                <input type="text" class="form-control" name="url" id="validationCustom05" value="">
               </div>
               <div class="mb-3">
-                <label for="formFile" class="form-label">Upload your resume </label>
-                <input class="form-control" type="file" name="pdf" value="<?php
-                                                                              echo $_SESSION['pdf["name"]'];
-                                                                              ?>" id="formFile">
+                <label for="formFile" class="form-label">Upload your resume: <?php
+                                                                            echo $_SESSION['pdf["name"]'];
+                                                                            ?> </label>
+                <input class="form-control" type="file" name="pdf" value="" id="formFile">
               </div>
             </div>
           </form>
