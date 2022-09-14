@@ -5,10 +5,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 session_start();
-
 //Load Composer's autoloader
 require 'vendor/autoload.php';
 require "../partials/_dbconnect.php";
+$_SESSION['emailexistsGoogle'] = false; 
     if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email']) && isset($_POST['jobtitle']) && isset($_POST['password']) && isset($_POST['passwordConfirmation'])) {
         $verify_email = $_POST['email'];
         $_SESSION['email'] = $verify_email;
@@ -22,6 +22,24 @@ require "../partials/_dbconnect.php";
         // if (!isset($_SESSION['emailverify'])) {
         //     $_SESSION['emailverify'] = false;
         // }
+        $sql = "SELECT emailId FROM `signup` WHERE emailId = '$verify_email'";
+        $result = mysqli_query($conn, $sql);
+        $rows = mysqli_num_rows($result);
+        if ($rows > 0) {
+            $_SESSION['showEmailError'] = true;
+            header("Location: ../login.php");
+            exit();
+        }
+        $sql = "SELECT email FROM `googlesignup` WHERE email ='$verify_email'";
+        $result = mysqli_query($conn, $sql);
+        $rows = mysqli_num_rows($result);
+        if ($rows > 0) {
+            $_SESSION['emailexistsGoogle'] = true;
+            header("Location: ../login.php");
+            exit();
+        }
+        
+        
         if ($password == $passwordconfirm) {
             // Validate password strength
         $uppercase = preg_match('@[A-Z]@', $password);
@@ -34,14 +52,7 @@ require "../partials/_dbconnect.php";
                 exit();
             }
             else{
-                $sql = "SELECT email FROM `googlesignup` WHERE email ='$verify_email'";
-                $result = mysqli_query($conn, $sql);
-                $rows = mysqli_num_rows($result);
-                if ($rows > 0) {
-                    $_SESSION['emailexistsGoogle'] = true;
-                    header("Location: ../login.php");
-                    exit();
-                }
+                
                 // else if ($_SESSION['emailverify'] == false) {
                 //     echo "Error. Wrong OTP entered, please try again.";
                 //     unset($_SESSION['emailverify']);
@@ -100,7 +111,7 @@ require "../partials/_dbconnect.php";
 }   
 
 ?>
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -115,4 +126,4 @@ require "../partials/_dbconnect.php";
     </form>
 </body>
 
-</html>
+</html> -->

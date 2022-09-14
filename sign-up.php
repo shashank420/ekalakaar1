@@ -1,10 +1,9 @@
 <?php
 session_start();
 require "googlelogin/config.php";
-if (!isset($_SESSION['showAlert']) || !isset($_SESSION['showError']) || !isset($_SESSION['passwordError']) || !isset($_SESSION['showEmailError'])) {
+if (!isset($_SESSION['showAlert']) || !isset($_SESSION['showError']) || !isset($_SESSION['passwordError'])) {
     $_SESSION['showAlert'] = false;
     $_SESSION['showError'] = false;
-    $_SESSION['showEmailError'] = false;
     $_SESSION['passwordError'] = false;
 }
 else if ($_SESSION['showAlert'] == true) {
@@ -21,13 +20,7 @@ else if($_SESSION['showError'] == true){
   </div>';
   unset($_SESSION['showError']);
 }
-else if($_SESSION['showEmailError'] == true){
-    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <strong>Error!</strong> Email ID  is already in use. Please try logging in or use a different email address.
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>';
-  unset($_SESSION['showEmailError']);
-}
+
 else if ($_SESSION['passwordError'] == true) {
     echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
     <strong>Error!</strong> Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.

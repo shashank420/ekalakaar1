@@ -37,12 +37,12 @@ if (isset($_GET['code'])){
             $sql = "INSERT INTO `googlesignup` (`userId`, `givenName`, `familyName`,  `email`, `picture`) VALUES ('$id', '$givenName', '$familyName', '$email', '$picture');";
             $result = mysqli_query($conn, $sql);
         }
-        header('Location: index.php');
+        header('Location: ../registeration1.php');
         exit();
 }
 else if (isset($_SESSION['access_token'])) {
     $client -> setAccessToken($_SESSION['access_token']);
-    header('Location: index.php');
+    header('Location: ../registeration1.php');
      exit();
 }
 else{

@@ -3,18 +3,23 @@ require "partials/_bootstrap.php";
 require "partials/_dbconnect.php";
 
 session_start();
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-  // if (isset($_POST['curr_position'])) {
+
+// if ($_SERVER['REQUEST_METHOD'] == "POST") {
+  if (isset($_POST['curr_position'])) {
   $curr_position = $_POST['curr_position'];
   $Role_of_application = $_POST['Role_of_application'];
   $firstName = $_POST['firstname'];
   $_SESSION['firstname'] = $firstName;
-  $lastName = $_POST['lastname'];
+  $lastName = $_POST['lastname1'];
   $_SESSION['lastname'] = $lastName;
+  $email = $_SESSION['email'];
   $phone = $_POST['phone'];
   $_SESSION['phone'] = $phone;
+<<<<<<< HEAD
   $email = $_SESSION['email'];
   $_SESSION['email'] = $email;
+=======
+>>>>>>> 5c22968b09474f3b2004de21d71df1a9a34986e0
   $age = $_POST['age'];
   $_SESSION['age'] = $age;
   $gender = $_POST['gender'];
@@ -52,7 +57,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   $pdf_tem_loc = $_FILES['pdf']['tmp_name'];
   $pdf_store = "../pdf/" . $pdf;
   move_uploaded_file($pdf_tem_loc, $pdf_store);
+<<<<<<< HEAD
   $sql = "UPDATE `registration` SET `Age` = '$age', 'FirstName'='$firstName','LastName'='$lastName','PhoneNumber'='$phone','Email'='$email','Gender'='$gender','Caste'='$caste','Religion'='$religion','Height'='$height','Weight1'='$weight','Lang'='$language','Skills'='$skills','Experience'='$experience','Awards'='$award','weblinks'='$url,'Reference'='$reference','pdf'='$pdf','Support'='$support','Suggestions'='$suggestions' WHERE `Email` = $email;";
+=======
+  $sql= "UPDATE `registration` SET `Age` = '$age', 'FirstName'='$firstName','LastName'='$lastName','PhoneNumber'='$phone', 'Gender'='$gender','Caste'='$caste','Religion'='$religion','Height'='$height','Weight1'='$weight','Lang'='$language','Skills'='$skills','Experience'='$experience','Awards'='$award','weblinks'='$url,'Reference'='$reference','pdf'='$pdf','Support'='$support','Suggestions'='$suggestions' WHERE `registration`.`Email` = '$email';";
+>>>>>>> 5c22968b09474f3b2004de21d71df1a9a34986e0
   $result = mysqli_query($conn, $sql);
 }
 
@@ -95,8 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       <a class="navbar-brand " style="margin-left: 70px;" href="index.php">
         <Span class="text-danger text"> <strong>ekala</strong></Span>kaar
       </a>
-
-
+      <a class="navbar-brand" href="partials/_logout.php">Logout</a>
     </div>
   </nav>
 
@@ -141,6 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
           <h5 class="card-title"></h5>
           <form action="user.php" method="post" class="row g-3 needs-validation" novalidate>
             <div class="col-md-4">
+<<<<<<< HEAD
               <label for="validationCustom01" class="form-label">First name: <?php
                                                                               echo $_SESSION['firstname'];
                                                                               ?>" disabled></label>
@@ -158,12 +167,29 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                                                                 echo $_SESSION['phone'];
                                                                                 ?></label>
               <input type="number" class="form-control" name="phone" value="">
+=======
+              <label for="validationCustom01" class="form-label">First name</label>
+              <input type="text" class="form-control" name="firstname" id="form-control" value="
+              <?php
+              echo $_SESSION['firstname'];
+              ?>" readonly>
+            </div>
+            <div class="col-md-4">
+              <label for="validationCustom02" class="form-label">Last name</label>
+              <input type="text" class="form-control" name="lastname1" value="<?php
+                                                                              echo $_SESSION['lastname'];
+                                                                              ?>">
+>>>>>>> 5c22968b09474f3b2004de21d71df1a9a34986e0
             </div>
             <div class="col-md-6">
               <label for="validationCustomUsername" class="form-label">Email:<?php echo $_SESSION['email']; ?></label>
               <div class="input-group has-validation">
                 <span class="input-group-text" id="inputGroupPrepend">@</span>
+<<<<<<< HEAD
                 <input type="text" class="form-control" name="email" aria-describedby="inputGroupPrepend" value="" disabled>
+=======
+                <input type="text" class="form-control" name="email" aria-describedby="inputGroupPrepend" value="<?php echo $_SESSION['email']; ?>" readonly>
+>>>>>>> 5c22968b09474f3b2004de21d71df1a9a34986e0
               </div>
             </div>
             <div class="col-md-4">
@@ -249,12 +275,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <input class="form-control" type="file" name="pdf" value="" id="formFile">
               </div>
             </div>
-          </form>
-          <a href="#" class="btn btn-danger" id="submit"> Save Changes</a>
-        </div>
-        <div class="card-footer text-muted">
-          Last changes 2 days ago
-        </div>
+            <button type="submit" class="btn btn-danger">Save Changes</button>
+          </div>
+          <div class="card-footer text-muted">
+            Last changes 2 days ago
+          </div>
+        </form>
       </div>
     </div>
   </section>

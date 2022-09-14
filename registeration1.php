@@ -1,3 +1,8 @@
+<?php
+session_start();
+require "partials/_dbconnect.php";
+
+?>
 <!doctype html>
 <html lang="en">
 
@@ -156,7 +161,7 @@
                     <label for="validationCustomUsername" class="form-label">Email</label>
                     <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" class="form-control" name="email" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                        <input type="text" class="form-control" name="email" value="<?php echo $_SESSION['email'];  ?>" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required readonly>
                         <div class="invalid-feedback">
                             Please enter your valid email id
                         </div>

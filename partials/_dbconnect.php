@@ -1,5 +1,9 @@
 <?php
 
+// $server = "localhost:3306";
+// $username = "ekalakaa_WPVB1";
+// $password = "HSw+no&nXoil";
+// $database = "ekalakaa_WPVB1";
 $server = "localhost";
 $username = "root";
 $password = "";
